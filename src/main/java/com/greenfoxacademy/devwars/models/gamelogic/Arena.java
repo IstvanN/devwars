@@ -2,7 +2,6 @@ package com.greenfoxacademy.devwars.models.gamelogic;
 
 import lombok.Getter;
 import lombok.Setter;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.*;
 import java.util.*;
@@ -58,7 +57,7 @@ public class Arena {
 
     private static void addHeroesFromCharacters() {
         //TODO rendomly order heroes, set one as active
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
 }
