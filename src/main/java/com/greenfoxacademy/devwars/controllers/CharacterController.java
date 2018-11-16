@@ -1,8 +1,6 @@
 package com.greenfoxacademy.devwars.controllers;
 
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
-import com.greenfoxacademy.devwars.models.characterlogic.CharacterCompetence;
-import com.greenfoxacademy.devwars.models.characterlogic.Competence;
 import com.greenfoxacademy.devwars.models.characterlogic.League;
 import com.greenfoxacademy.devwars.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class CharacterController {
@@ -30,6 +25,11 @@ public class CharacterController {
         model.addAttribute("competence2");
         return "create";
     }
+
+  @GetMapping("/")
+  public String showWelcome() {
+    return "welcome";
+  }
 
     @PostMapping("/create")
     public String postCreate(@ModelAttribute Character character,

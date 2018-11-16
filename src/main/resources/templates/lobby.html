@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{ :: body})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Welcome to the Lobby! </h2>
+<p>Here, Player 1 and Player 2, you guys can choose your characters. After that... well.</p>
+<form method="post" action="/getCharacters">
+    <label for="player1">Player1:</label>
+    <select id="player1" name="player1">
+        <option>Player1</option>
+    </select><br>
+    <label for="player2">Player2:</label>
+    <select>
+        <option id="player2" name="player2">Player2</option>
+    </select><br>
+    <button>FIGHT!</button>
+</form>
+</body>
+</html>

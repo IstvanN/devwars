@@ -1,15 +1,14 @@
 package com.greenfoxacademy.devwars.models.gamelogic;
 
 
+import com.greenfoxacademy.devwars.models.characterlogic.*;
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
-import com.greenfoxacademy.devwars.models.characterlogic.CharacterCompetence;
-import com.greenfoxacademy.devwars.models.characterlogic.League;
-import com.greenfoxacademy.devwars.models.characterlogic.OS;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -24,9 +23,10 @@ public class Hero {
   private int maxHP;
   private int currentHP;
   private int iq;
-  private int maxActionPoint;
-  private int currentActionPoint;
-  private boolean activeHero;
+  private int maxActionPoints;
+  private int currentActionPoints;
+  private int actionPointsPerTurn;
+  private Boolean active;
 
   @ManyToOne
   private Arena arena;
@@ -36,19 +36,43 @@ public class Hero {
           name = "hero_action",
           joinColumns = @JoinColumn(name = "hero_id")
   )
-  private List<HeroAction> availableActions;
+  private List<HeroAction> availableActions = new ArrayList<>();
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(
+          fetch = FetchType.EAGER
+  )
   private Character baseCharacter;
 
-  public Hero(int maxHP, int currentHP, int iq, int maxActionPoint, int currentActionPoint, boolean activeHero, List<HeroAction> availableActions, Character baseCharacter) {
+  public Hero(Arena arena, int maxHP, int currentHP, int iq, int maxActionPoints, int currentActionPoints, int actionPointsPerTurn, Character baseCharacter) {
+    this.arena = arena;
     this.maxHP = maxHP;
     this.currentHP = currentHP;
     this.iq = iq;
-    this.maxActionPoint = maxActionPoint;
-    this.currentActionPoint = currentActionPoint;
-    this.activeHero = activeHero;
-    this.availableActions = availableActions;
+    this.maxActionPoints = maxActionPoints;
+    this.currentActionPoints = currentActionPoints;
+    this.actionPointsPerTurn = actionPointsPerTurn;
     this.baseCharacter = baseCharacter;
+
+    this.availableActions = createAvailableActions();
+  }
+
+  private List<HeroAction> createAvailableActions() {
+    List<HeroAction> heroActions = new ArrayList<>();
+
+    List<Action> characterActions;
+    List<CharacterCompetence> baseCharacterCompetences = getBaseCharacter().getCompetences();
+    for (CharacterCompetence competence : baseCharacterCompetences) {
+      characterActions = competence.getCompetence().getIncludedActions();
+      for (Action action : characterActions) {
+        heroActions.add(HeroAction.fromAction(action));
+      }
+    }
+
+    return heroActions;
+  }
+
+  @Override
+  public String toString() {
+    return "Hero: " + baseCharacter;
   }
 }
