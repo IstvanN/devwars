@@ -36,6 +36,6 @@ public class ArenaController {
   {
       List<Long> characterIds = Arrays.asList(characterId1, characterId2);
       Long newArenaId = arenaService.createNewArenaFromCharacterIds(characterIds);
-      return "redirect:" + CONTROLLER_ROOT + "/" + newArenaId;
+      return "redirect:" + CONTROLLER_ROOT + newArenaId;
   }
 }

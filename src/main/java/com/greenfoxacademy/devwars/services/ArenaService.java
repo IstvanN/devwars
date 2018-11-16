@@ -29,7 +29,7 @@ public class ArenaService {
      * @return the id of the created Arena
      */
     public Long createNewArenaFromCharacters(List<Character> characters) {
-        Arena newArena = Arena.fromCharacters(characters);
+        Arena newArena = new Arena(characters);
         Arena savedArena = arenaRepository.save(newArena);
         return savedArena.getId();
     }

@@ -35,7 +35,7 @@ public class Arena {
 
     @ElementCollection
     @CollectionTable(name = "arena_action_log")
-    @MapKeyColumn(name = "action_order")
+    @MapKeyColumn(name = "action_order", length = 1000)
     Map<Integer, String> actionLog = new HashMap<>();
 
     int currentTurnNumber;
@@ -51,11 +51,10 @@ public class Arena {
         nextActionLogNumber = 1;
     }
 
-    public static Arena fromCharacters(List<Character> characters) {
-        Arena newArena = new Arena(DEFAULT_DICE_SIDES);
-        newArena.setHeroes(getHeroesFromCharacters(characters));
-        newArena.addActionLogMessage("Starting battle between these heroes: " + newArena.getHeroes());
-        return newArena;
+    public Arena(List<Character> characters) {
+        this(DEFAULT_DICE_SIDES);
+        setHeroes(getHeroesFromCharacters(characters));
+        addActionLogMessage("Starting battle between these heroes: " + this.getHeroes());
     }
 
     public int rollDice() {
@@ -67,13 +66,14 @@ public class Arena {
         nextActionLogNumber++;
     }
 
-    private static List<Hero> getHeroesFromCharacters(List<Character> characters) {
+    private List<Hero> getHeroesFromCharacters(List<Character> characters) {
         List<Hero> heroes = new ArrayList<>();
 
         for (Character character : characters) {
             int iqModifier = character.getOs().getIQmodifier();
 
             Hero newHero = new Hero(
+                    this,
                     DEFAULT_HERO_MAX_HP,
                     DEFAULT_HERO_STARTING_HP,
                     DEFAULT_HERO_IQ + iqModifier,
@@ -90,7 +90,7 @@ public class Arena {
         return heroes;
     }
 
-    private static void setRandomHeroOrder(List<Hero> heroes) {
+    private void setRandomHeroOrder(List<Hero> heroes) {
         int heroCount = heroes.size();
         int randomIndex = rand.nextInt(heroCount);
 

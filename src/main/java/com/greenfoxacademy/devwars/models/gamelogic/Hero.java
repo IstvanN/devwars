@@ -43,7 +43,8 @@ public class Hero {
   )
   private Character baseCharacter;
 
-  public Hero(int maxHP, int currentHP, int iq, int maxActionPoints, int currentActionPoints, int actionPointsPerTurn, Character baseCharacter) {
+  public Hero(Arena arena, int maxHP, int currentHP, int iq, int maxActionPoints, int currentActionPoints, int actionPointsPerTurn, Character baseCharacter) {
+    this.arena = arena;
     this.maxHP = maxHP;
     this.currentHP = currentHP;
     this.iq = iq;
