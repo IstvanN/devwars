@@ -12,5 +12,5 @@ INSERT INTO `action` (`action_type`, `base_amount`, `description`, `name`, `requ
 INSERT INTO `game_character` (`age`, `league`, `name`, `os_id`) VALUES ('23', '1', 'Joe', '1');
 INSERT INTO `game_character` (`age`, `league`, `name`, `os_id`) VALUES ('30', '2', 'Kate', '2');
 
-INSERT INTO `game_character_competence` (`character_id`, `competence_id`) VALUES (1, 1)
-INSERT INTO `game_character_competence` (`character_id`, `competence_id`) VALUES (2, 2)
+INSERT INTO `game_character_competence` (`character_id`, `competence_id`) VALUES (1, 1);
+INSERT INTO `game_character_competence` (`character_id`, `competence_id`) VALUES (2, 2);
