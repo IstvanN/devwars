@@ -5,12 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "game_character")
 @Entity
 public class Character {
 
@@ -20,10 +23,28 @@ public class Character {
 
     private String name;
     private int age;
-    private String os;
+
+    @OneToOne
+    private OS os;
+
     private League league;
+
     private String imgSource;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<Competence> competenceList = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(
+        name = "game_character_competence",
+        joinColumns = @JoinColumn(name = "character_id")
+    )
+    private List<CharacterCompetence> competences = new ArrayList<>();
+
+    public Character(String name, int age, String os, League league) {
+        this.name = name;
+        this.age = age;
+        this.os = new OS(os);
+        this.league = league;
+        switch (league) {
+            default: imgSource = "image.jpg";
+        }
+    }
 }
