@@ -38,7 +38,9 @@ public class Hero {
   )
   private List<HeroAction> availableActions = new ArrayList<>();
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(
+          fetch = FetchType.EAGER
+  )
   private Character baseCharacter;
 
   public Hero(int maxHP, int currentHP, int iq, int maxActionPoints, int currentActionPoints, int actionPointsPerTurn, Character baseCharacter) {

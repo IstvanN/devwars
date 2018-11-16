@@ -24,11 +24,12 @@ public class Arena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @OneToMany(
             mappedBy = "arena",
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
     )
     List<Hero> heroes;
 
