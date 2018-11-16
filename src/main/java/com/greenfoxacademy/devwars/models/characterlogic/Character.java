@@ -47,4 +47,14 @@ public class Character {
             default: imgSource = "image.jpg";
         }
     }
+
+    @Override
+    public String toString() {
+        return "Character {" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", os=" + os +
+                ", league=" + league +
+                '}';
+    }
 }
