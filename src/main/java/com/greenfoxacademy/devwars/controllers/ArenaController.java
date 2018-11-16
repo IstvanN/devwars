@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ArenaController {
 
-  @GetMapping("/")
+  @GetMapping("/arena")
   public String arena(){
     return "arena";
   }
