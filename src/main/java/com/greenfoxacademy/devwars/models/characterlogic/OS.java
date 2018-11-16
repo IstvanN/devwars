@@ -13,12 +13,21 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Competence {
+public class OS {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String description;
-    private CompetenceType type;
+    private String name;
+    private int IQmodifier;
+
+    public OS(String name) {
+        this.name = name;
+        switch (name) {
+            case "Linux": IQmodifier = 5;
+            case "Mac": IQmodifier = -5;
+        }
+    }
+
 }
