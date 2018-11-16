@@ -1,6 +1,5 @@
 package com.greenfoxacademy.devwars.models.characterlogic;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class League {
 
