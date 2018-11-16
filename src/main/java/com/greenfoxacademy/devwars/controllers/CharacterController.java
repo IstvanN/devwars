@@ -21,6 +21,7 @@ public class CharacterController {
     public String getCreate(Model model) {
         model.addAttribute("newcharacter", character);
         model.addAttribute("league", character.getLeague());
+        model.addAttribute("oslist", characterService.getOSList());
         model.addAttribute("competence1");
         model.addAttribute("competence2");
         return "create";

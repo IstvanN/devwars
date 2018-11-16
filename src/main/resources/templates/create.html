@@ -20,17 +20,17 @@
                     <input th:value="*{age}" type="text" name="age" id="age">
                 </div>
                 <div class="form-group">
-                    <label for="os">Operation System: </label>
+                    <label>Operation System: </label>
                     <select th:value="*{os}" name="os" id="os">
-                        <option name="linux" id="linux">Linux</option>
-                        <option name="macos" id="macos">MacOS</option>
+                        <option th:each="os : ${oslist}" th:text="${os.name}"></option>
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Developer League: </label>
                     <select>
-                        <option th:each="aleague : ${T(com.greenfoxacademy.devwars.models.characterlogic.Character.league).values()}"
-                                th:value="${state}"
-                                th:text="${state}">
+                        <option th:each="aleague : ${T(com.greenfoxacademy.devwars.models.characterlogic.League).values()}"
+                                th:value="${{aleague}}"
+                                th:text="${aleague}">
                         </option>
                     </select>
                 </div>
