@@ -1,4 +1,4 @@
 package com.greenfoxacademy.devwars.models;
 
-public class Cast {
+public class League {
 }
