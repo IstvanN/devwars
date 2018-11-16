@@ -17,10 +17,11 @@ public class Arena {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @ElementCollection
-    @CollectionTable(name = "arena_hero")
-    @MapKeyColumn(name = "hero_order")
-    Map<Integer, Hero> heroes = new HashMap<>();
+    @OneToMany(
+            mappedBy = "arena",
+            fetch = FetchType.EAGER
+    )
+    List<Hero> heroes;
 
     @ElementCollection
     @CollectionTable(name = "arena_action_log")
@@ -56,7 +57,7 @@ public class Arena {
     }
 
     private static void addHeroesFromCharacters() {
-        //TODO rendomly order heroes in the heroes map
+        //TODO rendomly order heroes, set one as active
         throw new NotImplementedException();
     }
 

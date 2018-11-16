@@ -22,15 +22,11 @@ public class Action {
   private String name;
   private String description;
   private int baseAmount;
-  private Hero caster;
-  private Hero target;
 
-  public Action(String name, int baseAmount, ActionType actionType, String description, Hero caster, Hero target) {
+  public Action(String name, int baseAmount, ActionType actionType, String description) {
     this.name = name;
     this.baseAmount = baseAmount;
     this.actionType = actionType;
     this.description = description;
-    this.caster = caster;
-    this.target = target;
   }
 }

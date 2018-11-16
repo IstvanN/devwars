@@ -9,29 +9,39 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Hero {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
   private int maxHP;
   private int currentHP;
   private int iq;
   private int maxActionPoint;
   private int currentActionPoint;
-  boolean activeHero;
-  private List<Action> availableActions;
-  // The following fields will be taken from the base character
-  private String name;
-  private League league;
-  private int age;
-  private OS os;
-  private String imgSource;
-  private List<CharacterCompetence> competences;
+  private boolean activeHero;
 
-  public Hero(int maxHP, int currentHP, int iq, int maxActionPoint, int currentActionPoint, boolean activeHero, List<Action> availableActions, Character baseCharacter) {
+  @ManyToOne
+  private Arena arena;
+
+  @ElementCollection
+  @CollectionTable(
+          name = "hero_action",
+          joinColumns = @JoinColumn(name = "hero_id")
+  )
+  private List<HeroAction> availableActions;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  private Character baseCharacter;
+
+  public Hero(int maxHP, int currentHP, int iq, int maxActionPoint, int currentActionPoint, boolean activeHero, List<HeroAction> availableActions, Character baseCharacter) {
     this.maxHP = maxHP;
     this.currentHP = currentHP;
     this.iq = iq;
@@ -39,12 +49,6 @@ public class Hero {
     this.currentActionPoint = currentActionPoint;
     this.activeHero = activeHero;
     this.availableActions = availableActions;
-    // The following fields will be taken from the base character
-    this.name = baseCharacter.getName();
-    this.league = baseCharacter.getLeague();
-    this.age = baseCharacter.getAge();
-    this.os = baseCharacter.getOs();
-    this.imgSource = baseCharacter.getImgSource();
-    this.competences = baseCharacter.getCompetences();
+    this.baseCharacter = baseCharacter;
   }
 }
