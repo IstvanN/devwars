@@ -1,1 +1,1 @@
-A web application.
+MöthGames proudly presents: DevWars, an interactive, turn-based web application where you can create your own developer character, and fight other developer characters with skills, items, weapons etc.
