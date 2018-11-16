@@ -21,9 +21,8 @@ public class Character {
     private String name;
     private int age;
     private String os;
-
-    @OneToOne(cascade = CascadeType.ALL)
     private League league;
+    private String imgSource;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Competence> competenceList = new HashSet<>();
