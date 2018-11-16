@@ -15,7 +15,7 @@ public class LobbyController {
 
   @GetMapping("/lobby")
   public String showLobby(Model model) {
-    List<Character> characters = 
+    List<Character> characters =
     return "lobby";
   }
 
