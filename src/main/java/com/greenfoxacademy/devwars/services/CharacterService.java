@@ -11,6 +11,7 @@ public class CharacterService {
     @Autowired
     CharacterRepository characterRepository;
 
+
     public void save(Character character) {
         characterRepository.save(character);
     }
