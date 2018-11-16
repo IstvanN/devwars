@@ -1,13 +1,11 @@
 package com.greenfoxacademy.devwars.models.gamelogic;
 
+import com.greenfoxacademy.devwars.models.characterlogic.Competence;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -22,6 +20,9 @@ public class Action {
   private String name;
   private String description;
   private int baseAmount;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Competence requiredCompetence;
 
   public Action(String name, int baseAmount, ActionType actionType, String description) {
     this.name = name;
