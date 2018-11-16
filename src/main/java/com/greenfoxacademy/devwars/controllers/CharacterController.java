@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CharacterController {
 
+  @GetMapping("/")
+  public String showWelcome() {
+    return "welcome";
+  }
+
   @GetMapping("/create")
   public String getCreate(){
     return "create";

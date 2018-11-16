@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{ :: body})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Welcome to the Lobby! </h2>
+<p>Here, Player 1 and Player 2, you guys can choose your characters. After that... well.</p>
+<form method="post" action="/getCharacters">
+    <button>FIGHT!</button>
+</form>
+</body>
+</html>
