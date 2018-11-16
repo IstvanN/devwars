@@ -11,7 +11,7 @@ body {
     background-color: black;
 }
 
-.row {
-    border: 2px dashed white;
+.col-3, .col-6, .col-8 {
+    border: 2px dashed white !important;
     margin: 20px !important;
 }

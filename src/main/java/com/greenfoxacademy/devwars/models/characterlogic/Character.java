@@ -47,4 +47,5 @@ public class Character {
             default: imgSource = "image.jpg";
         }
     }
+
 }
