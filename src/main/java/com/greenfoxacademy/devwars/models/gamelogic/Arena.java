@@ -35,7 +35,11 @@ public class Arena {
 
     @ElementCollection
     @CollectionTable(name = "arena_action_log")
-    @MapKeyColumn(name = "action_order", length = 1000)
+    @MapKeyColumn(name = "action_order")
+    @Column(
+            name = "message",
+            length = 1000
+    )
     Map<Integer, String> actionLog = new HashMap<>();
 
     int currentTurnNumber;
