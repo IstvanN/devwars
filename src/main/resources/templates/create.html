@@ -5,24 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Character creation</h2>
-<div>
+<div class="container">
+    <div class="row">
+    <div class="col-8">
+    <h2>Character creation</h2>
+
     <form action="/create" method="post">
-        <div>
+        <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name">
         </div>
-        <div>
+        <div class="form-group">
             <label for="age">Age:</label>
             <input type="text" name="age" id="age">
         </div>
-        <div>
+        <div class="form-group">
             <select name="os">
                 <option name="linux" id="linux">Linux</option>
                 <option name="macos" id="macos">MacOS</option>
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <select name="league">
                 <option name="backend" id="backend">Backend</option>
                 <option name="frontend" id="frontend">Frontend</option>
@@ -32,7 +35,7 @@
                 <option name="embedded" id="embedded">Embedded</option>
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <select name="language">
                 <option name="java" id="java">Java</option>
                 <option name="javascript" id="javascript">Javascript</option>
@@ -40,7 +43,7 @@
                 <option name="python" id="python">Python</option>
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <select name="technology">
                 <option name="vim" id="vim">Vim</option>
                 <option name="nano" id="nano">Nano</option>
@@ -49,10 +52,12 @@
                 <option name="angular" id="angular">Angular</option>
             </select>
         </div>
-        <div>
-            <input type="submit" value="Create">
+        <div class="form-group">
+            <input class="btn btn-dark" type="submit" value="Create">
         </div>
     </form>
+    </div>
+    </div>
 </div>
 </body>
 </html>

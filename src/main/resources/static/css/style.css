@@ -1,0 +1,17 @@
+h1, h2, p, td, label {
+    font-family: "Inconsolata", "Courier New", sans-serif !important;
+    color: white;
+}
+
+input {
+    font-family: "Inconsolata", "Courier New", sans-serif !important;
+}
+
+body {
+    background-color: black;
+}
+
+.row {
+    border: 2px dashed white;
+    margin: 20px !important;
+}
