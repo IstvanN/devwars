@@ -20,13 +20,13 @@
                 </div>
                 <div class="form-group">
                     <label for="os">Operation System:</label>
-                    <select id="os" name="osId">
+                    <select class="form-control-sm" id="os" name="osId">
                         <option th:each="os : ${oslist}" th:text="${os.name}" th:value="${os.id}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="league">Developer League: </label>
-                    <select id="league" name="league">
+                    <select class="form-control-sm" id="league" name="league">
                         <option th:each="league : ${T(com.greenfoxacademy.devwars.models.characterlogic.League).values()}"
                                 th:value="${{league}}" th:text="${leagueStat.current}">
                         </option>
@@ -34,13 +34,13 @@
                 </div>
                 <div class="form-group">
                     <label>Languages:</label>
-                    <select name="languageId">
+                    <select class="form-control-sm" name="languageId">
                         <option th:each="language : ${languages}" th:value="${language.id}" th:text="${language.description}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Technology:</label>
-                    <select name="technologyId">
+                    <select class="form-control-sm" name="technologyId">
                         <option th:each="technology : ${technologies}" th:value="${technology.id}" th:text="${technology.description}"></option>
                     </select>
                 </div>
