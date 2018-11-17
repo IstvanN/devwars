@@ -25,6 +25,10 @@ public class CharacterService {
         characterRepository.save(character);
     }
 
+    public List<Character> getAllCharacters() {
+        return characterRepository.findAll();
+    }
+
     public List<OS> getOSList() {
         return osRepository.findAll();
     }
@@ -32,4 +36,5 @@ public class CharacterService {
     public List<Competence> findAll() {
         return competenceRepository.findAll();
     }
+
 }
