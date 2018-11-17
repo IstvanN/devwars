@@ -69,4 +69,8 @@ public class ArenaService {
         arenaRepository.save(arena);
     }
 
+    public void deleteArena(Long id) {
+        arenaRepository.deleteById(id);
+    }
+
 }

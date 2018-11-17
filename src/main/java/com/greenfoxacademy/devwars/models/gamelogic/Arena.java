@@ -46,6 +46,8 @@ public class Arena {
     int currentTurnNumber;
     int currentHeroIndex;
 
+    boolean gameOver;
+
     @Transient
     Hero currentHero;
 
@@ -58,6 +60,7 @@ public class Arena {
         dice = new Dice(diceSides);
         currentTurnNumber = 0;
         nextActionLogNumber = 1;
+        gameOver = false;
     }
 
     public Arena(List<Character> characters) {
@@ -81,8 +84,34 @@ public class Arena {
     }
 
     public void executeEndTurn(List<HeroAction> heroActions) {
+        if (gameOver)
+            return;
+
         executeHeroActions(getCurrentHero(), heroActions);
-        startNextTurn();
+        checkForGameEnd();
+        if (!gameOver)
+            startNextTurn();
+    }
+
+    private void checkForGameEnd() {
+        for (Hero hero : heroes) {
+            if (hero.getCurrentHP() <= 0)
+                gameOverFor(hero);
+        }
+    }
+
+    private void gameOverFor(Hero hero) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("*** GAME OVER ***");
+        sb.append(System.lineSeparator());
+        sb.append(hero.getBaseCharacter().getName());
+        sb.append(" has totally lost!");
+        sb.append(System.lineSeparator());
+        sb.append("THIS GAME WILL NOW BE DELETED");
+
+        addActionLogMessage(sb.toString());
+
+        gameOver = true;
     }
 
     public Hero getCurrentHero() {

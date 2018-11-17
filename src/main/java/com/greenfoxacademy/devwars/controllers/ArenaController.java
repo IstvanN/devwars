@@ -53,4 +53,10 @@ public class ArenaController {
         arenaService.executeEndTurn(id, selectedAction);
         return "redirect:" + CONTROLLER_ROOT + id;
   }
+
+  @PostMapping("{id}/delete")
+    public String deleteArena(@PathVariable("id") Long id) {
+      arenaService.deleteArena(id);
+      return "redirect:/";
+  }
 }
