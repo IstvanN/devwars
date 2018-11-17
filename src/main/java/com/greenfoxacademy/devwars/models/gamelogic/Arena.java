@@ -50,6 +50,10 @@ public class Arena {
 
     @Transient
     Hero currentHero;
+    @Transient
+    Hero leftHero;
+    @Transient
+    Hero rightHero;
 
     Dice dice;
 
@@ -119,6 +123,20 @@ public class Arena {
             this.currentHero = heroes.get(currentHeroIndex);
 
         return this.currentHero;
+    }
+
+    public Hero getLeftHero() {
+        if (this.leftHero == null)
+            this.leftHero = heroes.get(0);
+
+        return this.leftHero;
+    }
+
+    public Hero getRightHero() {
+        if (this.rightHero == null)
+            this.rightHero = heroes.get(1);
+
+        return this.rightHero;
     }
 
     private void executeHeroActions(Hero sourceHero, List<HeroAction> heroActions) {
@@ -259,8 +277,14 @@ public class Arena {
                 this.currentHeroIndex = i;
                 this.currentHero = oneHero;
                 this.currentHero.setActive(true);
+
+                //nasty hack for two-player mode only
+                this.leftHero = oneHero;
             } else {
                 oneHero.setActive(false);
+
+                //nasty hack for two-player mode only
+                this.rightHero = oneHero;
             }
         }
     }
