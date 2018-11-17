@@ -16,30 +16,28 @@ import java.util.ArrayList;
 
 @Controller
 public class CharacterController {
-    Character character = new Character();
 
-    @Autowired
-    CharacterService characterService;
-
-    @GetMapping("/create")
-    public String getCreate(Model model) {
-        model.addAttribute("newcharacter", character);
-        model.addAttribute("newos", new OS());
-        model.addAttribute("newleague", character.getLeague());
-        model.addAttribute("newcompetences", new ArrayList<CharacterCompetence>());
-        model.addAttribute("oslist", characterService.getOSList());
-        model.addAttribute("competences", characterService.findAll());
-        return "create";
-    }
+  @Autowired
+  CharacterService characterService;
 
   @GetMapping("/")
   public String showWelcome() {
     return "welcome";
   }
 
-    @PostMapping("/create")
-    public String postCreate(@ModelAttribute Character character, @ModelAttribute League league, @ModelAttribute OS os, @ModelAttribute ArrayList<CharacterCompetence> competences) {
-        characterService.save(character);
-        return "redirect:/";
-    }
+  @GetMapping("/create")
+  public String getCreate(Model model) {
+    Character character = new Character();
+    model.addAttribute("newcharacter", character);
+    model.addAttribute("oslist", characterService.getOSList());
+    model.addAttribute("newcompetences", new ArrayList<CharacterCompetence>());
+    model.addAttribute("competences", characterService.getAllCompetences());
+    return "create";
+  }
+
+  @PostMapping("/create")
+  public String postCreate(@ModelAttribute Character character, @ModelAttribute League league, @ModelAttribute OS os, @ModelAttribute ArrayList<CharacterCompetence> competences) {
+    characterService.save(character);
+    return "redirect:/";
+  }
 }

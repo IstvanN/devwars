@@ -33,7 +33,7 @@ public class CharacterService {
         return osRepository.findAll();
     }
 
-    public List<Competence> findAll() {
+    public List<Competence> getAllCompetences() {
         return competenceRepository.findAll();
     }
 
