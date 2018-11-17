@@ -39,13 +39,12 @@ public class CharacterController {
 
   @PostMapping("/create")
   public String postCreate(@ModelAttribute Character character, @RequestParam("osId") Long osId,
-                           @RequestParam("league") League league, @RequestParam("language") Competence language,
-                           @RequestParam("technology") Competence technology) {
+                           @RequestParam("league") League league, @RequestParam("languageId") Long languageId,
+                           @RequestParam("technologyId") Long technologyId) {
     OS os = characterService.getOSById(osId);
     character.setOs(os);
     character.setLeague(league);
-    List<Competence> competences = Arrays.asList(language, technology);
-    character.setCompetences(competences);
+    characterService.addCompetencesToCharacter(character, languageId, technologyId);
     characterService.save(character);
     return "redirect:/";
   }

@@ -48,4 +48,12 @@ public class CharacterService {
       return osRepository.findById(id).orElse(null);
     }
 
+    public void addCompetencesToCharacter(Character character, Long languageId, Long technologyId) {
+      Competence language = competenceRepository.findById(languageId).orElse(null);
+      Competence technology = competenceRepository.findById(technologyId).orElse(null);
+
+      character.addCompetence(language);
+      character.addCompetence(technology);
+    }
+
 }

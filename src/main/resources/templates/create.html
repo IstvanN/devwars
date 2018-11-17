@@ -34,14 +34,14 @@
                 </div>
                 <div class="form-group">
                     <label>Languages:</label>
-                    <select name="language">
-                        <option th:each="language : ${languages}" th:value="${language}" th:text="${language.description}"></option>
+                    <select name="languageId">
+                        <option th:each="language : ${languages}" th:value="${language.id}" th:text="${language.description}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Technology:</label>
-                    <select name="technology">
-                        <option th:each="technology : ${technologies}" th:value="${technology}" th:text="${technology.description}"></option>
+                    <select name="technologyId">
+                        <option th:each="technology : ${technologies}" th:value="${technology.id}" th:text="${technology.description}"></option>
                     </select>
                 </div>
                 <input class="btn btn-dark" type="submit" value="Create">

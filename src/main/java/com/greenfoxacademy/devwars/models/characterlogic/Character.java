@@ -15,44 +15,50 @@ import java.util.List;
 @Entity
 public class Character {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    private String name;
-    private int age;
+  private String name;
+  private int age;
 
-    @OneToOne
-    private OS os;
+  @OneToOne
+  private OS os;
 
-    private League league;
+  private League league;
 
-    private String imgSource;
+  private String imgSource;
 
-    @ElementCollection
-    @CollectionTable(
-        name = "game_character_competence",
-        joinColumns = @JoinColumn(name = "character_id")
-    )
-    private List<CharacterCompetence> competences = new ArrayList<>();
+  @ElementCollection
+  @CollectionTable(
+      name = "game_character_competence",
+      joinColumns = @JoinColumn(name = "character_id")
+  )
+  private List<CharacterCompetence> competences = new ArrayList<>();
 
-    public Character(String name, int age, String os, League league) {
-        this.name = name;
-        this.age = age;
-        this.os = new OS(os);
-        this.league = league;
-        switch (league) {
-            default: imgSource = "image.jpg";
-        }
+  public Character(String name, int age, String os, League league) {
+    this.name = name;
+    this.age = age;
+    this.os = new OS(os);
+    this.league = league;
+    switch (league) {
+      default:
+        imgSource = "image.jpg";
     }
-    @Override
-    public String toString() {
-        return "Character {" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", os=" + os +
-                ", league=" + league +
-                '}';
-    }
+  }
 
+  @Override
+  public String toString() {
+    return "Character {" +
+        "name='" + name + '\'' +
+        ", age=" + age +
+        ", os=" + os +
+        ", league=" + league +
+        '}';
+  }
+
+  public void addCompetence(Competence competence) {
+    CharacterCompetence characterCompetence = new CharacterCompetence(competence);
+    competences.add(characterCompetence);
+  }
 }
