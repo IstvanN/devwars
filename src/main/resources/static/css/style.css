@@ -12,7 +12,12 @@ body {
     color: white;
 }
 
-.col-3, .col-6, .col-8 {
+.col-3, .col-5, .col-8 {
     border: 2px dashed white !important;
     margin: 20px !important;
+}
+
+.battle-log {
+    height: 500px !important;
+    overflow: scroll;
 }
