@@ -1,5 +1,8 @@
 package com.greenfoxacademy.devwars.models.characterlogic;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public enum League {
     BACKEND {
         public String toString() {

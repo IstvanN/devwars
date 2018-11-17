@@ -21,8 +21,8 @@
                 </div>
                 <div class="form-group">
                     <label>Operation System: </label>
-                    <select th:value="*{os}" name="os" id="os">
-                        <option th:each="os : ${oslist}" th:text="${os.name}"></option>
+                    <select name="os" id="os">
+                        <option th:value="*{os}" th:each="os : ${oslist}" th:text="${os.name}"></option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -35,23 +35,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="os">Language: </label>
-                    <select name="language">
-                        <option name="java" id="java">Java</option>
-                        <option name="javascript" id="javascript">Javascript</option>
-                        <option name="c" id="c">C</option>
-                        <option name="python" id="python">Python</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="os">Technology: </label>
-                    <select th:value="*{competences}" name="technology">
-                        <option name="vim" id="vim">Vim</option>
-                        <option name="nano" id="nano">Nano</option>
-                        <option name="thymeleaf" id="thymeleaf">Thymeleaf</option>
-                        <option name="spring" id="spring">Spring</option>
-                        <option name="angular" id="angular">Angular</option>
-                    </select>
+                    <label>Competences: </label>
+                    <input type="checkbox" th:value="*{competences}" th:each="competence : ${competences}" th:text="${competence.description}">
                 </div>
                 <div class="form-group">
                     <input class="btn btn-dark" type="submit" value="Create">
