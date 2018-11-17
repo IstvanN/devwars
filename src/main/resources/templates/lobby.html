@@ -11,13 +11,13 @@
         <p>Here, Player 1 and Player 2, you guys can choose your characters. After that... well.</p>
         <form method="post" action="/arena/">
             <label for="player1">Player1:</label><br>
-            <select id="player1" name="characterId1">
+            <select class="form-control-sm" id="player1" name="characterId1">
                 <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">
                     Player1
                 </option>
             </select><br>
             <label for="player2">Player2:</label><br>
-            <select id="player2" name="characterId2">
+            <select class="form-control-sm" id="player2" name="characterId2">
                 <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">
                     Player2
                 </option>

@@ -46,10 +46,10 @@
 
             <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
                 <label for="selectedAction">Action:</label>
-                <select id="selectedAction" name="selectedAction">
+                <select class="form-control-sm" id="selectedAction" name="selectedAction">
                     <option th:each="action : ${arena.getCurrentHero().getAvailableActions()}" th:text="${action.getName()}" th:value="${action.getName()}" ></option>
                 </select>
-                <button type="submit">End Turn</button>
+                <button class="btn btn-dark" type="submit">End Turn</button>
             </form>
         </div>
         <div class="col-5">
