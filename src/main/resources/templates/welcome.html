@@ -5,16 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<h2>MöthGames proudly presents:
-    DevWars, an interactive, turn-based web application where you can create your own developer character,
-    and fight other developer characters with skills, items, weapons etc.</h2>
-<p>If you are here for the first time, go ahead, and create your own character!</p>
-<form method="get" action="/create">
-    <button>CREATE CHARACTER</button>
-</form>
-<p>... or, if you prefer, go ahead and fight with an existing character!</p>
-<form method="get" action="/lobby">
-    <button>ENTER THE ARENA!</button>
-</form>
+<div class="container">
+    <div class="col-10">
+        <h2><img class="logo" src="/images/moth.jpg"> MöthGames proudly presents:
+            DevWars, an interactive, turn-based web application where you can create your own developer character,
+            and fight other developer characters with skills, items, weapons etc.</h2>
+        <p>If you are here for the first time, go ahead, and create your own character!</p>
+        <form method="get" action="/create">
+            <button class="btn btn-dark">CREATE CHARACTER</button>
+        </form>
+        <p>... or, if you prefer, go ahead and fight with an existing character!</p>
+        <form method="get" action="/lobby">
+            <button class="btn btn-dark">ENTER THE ARENA!</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

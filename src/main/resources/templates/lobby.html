@@ -5,21 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Welcome to the Lobby! </h2>
-<p>Here, Player 1 and Player 2, you guys can choose your characters. After that... well.</p>
-<form method="post" action="/arena/">
-    <label for="player1">Player1:</label><br>
-    <select id="player1" name="characterId1">
-        <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">Player1</option>
-    </select><br>
-    <label for="player2">Player2:</label><br>
-    <select id="player2" name="characterId2">
-        <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">Player2</option>
-    </select><br>
-    <button>FIGHT!</button>
-</form>
-<form method="get" action="/">
-    <button>Back to main menu</button>
-</form>
+<div class="container">
+    <div class="col-10">
+        <h2>Welcome to the Lobby! </h2>
+        <p>Here, Player 1 and Player 2, you guys can choose your characters. After that... well.</p>
+        <form method="post" action="/arena/">
+            <label for="player1">Player1:</label><br>
+            <select class="form-control-sm" id="player1" name="characterId1">
+                <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">
+                    Player1
+                </option>
+            </select><br>
+            <label for="player2">Player2:</label><br>
+            <select class="form-control-sm" id="player2" name="characterId2">
+                <option th:each="character : ${characters}" th:text="${character.name}" th:value="${character.id}">
+                    Player2
+                </option>
+            </select><br>
+            <button class="btn btn-dark">FIGHT!</button>
+        </form>
+        <form method="get" action="/">
+            <button class="btn btn-dark">Back to main menu</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
