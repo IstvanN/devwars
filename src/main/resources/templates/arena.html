@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row" th:object="${arena}">
         <div class="col-3">
             <h2>Current Hero</h2>
@@ -52,9 +52,9 @@
                 <button type="submit">End Turn</button>
             </form>
         </div>
-        <div class="col-6">
+        <div class="col-5">
             <h2>Battle log</h2>
-            <div>
+            <div class="battle-log">
                 <div th:each="message : ${arena.getActionLog().values()}" >
                     <span>-> </span>
                     <span th:text="${message}"></span>
