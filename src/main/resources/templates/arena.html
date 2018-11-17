@@ -44,7 +44,7 @@
                 </tr>
                 <tr><th>Action</th><th></th></tr>
             </table>
-
+            <div th:if="${!arena.isGameOver()}">
             <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
                 <label for="selectedAction">Action:</label>
                 <select class="form-control-sm" id="selectedAction" name="selectedAction">
@@ -52,6 +52,12 @@
                 </select>
                 <button class="btn btn-dark" type="submit">End Turn</button>
             </form>
+            </div>
+            <div th:if="${arena.isGameOver()}">
+                <form th:action="@{'/arena/' + ${arena.getId()} + '/delete'}" th:method="post">
+                <button class="btn btn-dark" type="submit">Leave Arena</button>
+                </form>
+            </div>
         </div>
         <div class="col-5">
             <h2>Battle log</h2>
