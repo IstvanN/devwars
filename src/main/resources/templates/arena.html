@@ -9,60 +9,72 @@
 <div class="container-fluid">
     <div class="row" th:object="${arena}">
         <div class="col-3">
-            <h2>Current Hero</h2>
-            <img th:src="${arena.getCurrentHero().getBaseCharacter().getImgSource()}">
+            <h2>Player 1</h2>
+            <img th:src="${arena.getLeftHero().getBaseCharacter().getImgSource()}">
             <table>
-                <tr><th>Stats</th><th></th></tr>
+                <tr>
+                    <th>Stats</th>
+                    <th></th>
+                </tr>
                 <tr>
                     <td>HP:</td>
-                    <td th:text="${arena.getCurrentHero().getCurrentHP()}"></td>
+                    <td th:text="${arena.getLeftHero().getCurrentHP()}"></td>
                 </tr>
                 <tr>
                     <td>Action Points:</td>
-                    <td th:text="${arena.getCurrentHero().getCurrentActionPoints()}"></td>
+                    <td th:text="${arena.getLeftHero().getCurrentActionPoints()}"></td>
                 </tr>
                 <tr>
                     <td>IQ:</td>
-                    <td th:text="${arena.getCurrentHero().getIq()}"></td>
+                    <td th:text="${arena.getLeftHero().getIq()}"></td>
                 </tr>
-                <tr><th>Character</th><th></th></tr>
+                <tr>
+                    <th>Character</th>
+                    <th></th>
+                </tr>
                 <tr>
                     <td>Name:</td>
-                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getName()}"></td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getName()}"></td>
                 </tr>
                 <tr>
                     <td>Age:</td>
-                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getAge()}"></td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getAge()}"></td>
                 </tr>
                 <tr>
                     <td>League:</td>
-                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getLeague()}"></td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getLeague()}"></td>
                 </tr>
                 <tr>
                     <td>OS:</td>
-                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getOs().getName()}"></td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getOs().getName()}"></td>
                 </tr>
-                <tr><th>Action</th><th></th></tr>
+                <tr>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
             </table>
-            <div th:if="${!arena.isGameOver()}">
-            <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
-                <label for="selectedAction">Action:</label>
-                <select class="form-control-sm" id="selectedAction" name="selectedAction">
-                    <option th:each="action : ${arena.getCurrentHero().getAvailableActions()}" th:text="${action.getName()}" th:value="${action.getName()}" ></option>
-                </select>
-                <button class="btn btn-dark" type="submit">End Turn</button>
-            </form>
-            </div>
-            <div th:if="${arena.isGameOver()}">
-                <form th:action="@{'/arena/' + ${arena.getId()} + '/delete'}" th:method="post">
-                <button class="btn btn-dark" type="submit">Leave Arena</button>
-                </form>
+            <div th:if="${arena.getLeftHero().active}">
+                <div th:if="${!arena.isGameOver()}">
+                    <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
+                        <label>Action:</label>
+                        <select class="form-control-sm" name="selectedAction">
+                            <option th:each="action : ${arena.getCurrentHero().getAvailableActions()}"
+                                    th:text="${action.getName()}" th:value="${action.getName()}"></option>
+                        </select>
+                        <button class="btn btn-dark" type="submit">End Turn</button>
+                    </form>
+                </div>
+                <div th:if="${arena.isGameOver()}">
+                    <form th:action="@{'/arena/' + ${arena.getId()} + '/delete'}" th:method="post">
+                        <button class="btn btn-dark" type="submit">Leave Arena</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-5">
             <h2>Battle log</h2>
             <div class="battle-log">
-                <div th:each="message : ${arena.getActionLog().values()}" >
+                <div th:each="message : ${arena.getActionLog().values()}">
                     <span>-> </span>
                     <span th:text="${message}"></span>
                     <br>
@@ -70,7 +82,66 @@
             </div>
         </div>
         <div class="col-3">
-            <h2>Enemy</h2>
+            <h2>Player 2</h2>
+            <table>
+                <tr>
+                    <th>Stats</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>HP:</td>
+                    <td th:text="${arena.getRightHero().getCurrentHP()}"></td>
+                </tr>
+                <tr>
+                    <td>Action Points:</td>
+                    <td th:text="${arena.getRightHero().getCurrentActionPoints()}"></td>
+                </tr>
+                <tr>
+                    <td>IQ:</td>
+                    <td th:text="${arena.getRightHero().getIq()}"></td>
+                </tr>
+                <tr>
+                    <th>Character</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getName()}"></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getAge()}"></td>
+                </tr>
+                <tr>
+                    <td>League:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getLeague()}"></td>
+                </tr>
+                <tr>
+                    <td>OS:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getOs().getName()}"></td>
+                </tr>
+                <tr>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </table>
+            <div th:if="${arena.getRightHero().active}">
+                <div th:if="${!arena.isGameOver()}">
+                    <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
+                        <label>Action:</label>
+                        <select class="form-control-sm"name="selectedAction">
+                            <option th:each="action : ${arena.getCurrentHero().getAvailableActions()}"
+                                    th:text="${action.getName()}" th:value="${action.getName()}"></option>
+                        </select>
+                        <button class="btn btn-dark" type="submit">End Turn</button>
+                    </form>
+                </div>
+                <div th:if="${arena.isGameOver()}">
+                    <form th:action="@{'/arena/' + ${arena.getId()} + '/delete'}" th:method="post">
+                        <button class="btn btn-dark" type="submit">Leave Arena</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
