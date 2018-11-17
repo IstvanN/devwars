@@ -2,6 +2,7 @@ package com.greenfoxacademy.devwars.services;
 
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
 import com.greenfoxacademy.devwars.models.characterlogic.Competence;
+import com.greenfoxacademy.devwars.models.characterlogic.CompetenceType;
 import com.greenfoxacademy.devwars.models.characterlogic.OS;
 import com.greenfoxacademy.devwars.repositories.CharacterRepository;
 import com.greenfoxacademy.devwars.repositories.CompetenceRepository;
@@ -35,6 +36,18 @@ public class CharacterService {
 
     public List<Competence> getAllCompetences() {
         return competenceRepository.findAll();
+    }
+
+    public List<Competence> getAllLanguages() {
+      return competenceRepository.findAllByType(CompetenceType.LANGUAGE);
+    }
+
+    public List<Competence> getAllTechnologies() {
+      return competenceRepository.findAllByType(CompetenceType.TECHNOLOGY);
+    }
+
+    public OS getOSById(long id) {
+      return osRepository.findById(id).orElse(null);
     }
 
 }

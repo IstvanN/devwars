@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -31,12 +32,16 @@ public class CharacterController {
     model.addAttribute("newcharacter", character);
     model.addAttribute("oslist", characterService.getOSList());
     model.addAttribute("newcompetences", new ArrayList<CharacterCompetence>());
-    model.addAttribute("competences", characterService.getAllCompetences());
+    model.addAttribute("languages", characterService.getAllLanguages());
+    model.addAttribute("technologies", characterService.getAllTechnologies());
     return "create";
   }
 
   @PostMapping("/create")
-  public String postCreate(@ModelAttribute Character character, @ModelAttribute League league, @ModelAttribute OS os, @ModelAttribute ArrayList<CharacterCompetence> competences) {
+  public String postCreate(@ModelAttribute Character character, @RequestParam("osId") Long osId, @RequestParam("league") League league) {
+    OS os = characterService.getOSById(osId);
+    character.setOs(os);
+    character.setLeague(league);
     characterService.save(character);
     return "redirect:/";
   }
