@@ -1,4 +1,4 @@
-h1, h2, p, td, label, span {
+h1, h2, p, td, label, span, a, button {
     font-family: "Inconsolata", "Courier New", sans-serif !important;
     color: white;
 }
