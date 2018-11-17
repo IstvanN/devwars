@@ -5,6 +5,12 @@ INSERT INTO `os` (`iqmodifier`, `name`) VALUES (-2, 'Win');
 
 INSERT INTO `competence` (`description`, `type`) VALUES ('Java', '0');
 INSERT INTO `competence` (`description`, `type`) VALUES ('Python', '0');
+INSERT INTO `competence` (`description`, `type`) VALUES ('JavaScript', '0');
+INSERT INTO `competence` (`description`, `type`) VALUES ('C', '0');
+INSERT INTO `competence` (`description`, `type`) VALUES ('Spring', '1');
+INSERT INTO `competence` (`description`, `type`) VALUES ('Thymeleaf', '1');
+INSERT INTO `competence` (`description`, `type`) VALUES ('Angular', '1');
+INSERT INTO `competence` (`description`, `type`) VALUES ('Vim', '1');
 
 INSERT INTO `action` (`action_type`, `base_amount`, `description`, `name`, `required_competence_id`) VALUES ('1', '6', 'flame', 'Flamma', '1');
 INSERT INTO `action` (`action_type`, `base_amount`, `description`, `name`, `required_competence_id`) VALUES ('1', '7', 'ice', 'Coool', '2');
