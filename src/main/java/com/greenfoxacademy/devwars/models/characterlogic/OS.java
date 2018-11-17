@@ -30,4 +30,9 @@ public class OS {
         }
     }
 
+    @Override
+    public String toString() {
+        return "OS " +
+                "name=" + name + " ";
+    }
 }

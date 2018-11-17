@@ -94,11 +94,78 @@ public class Arena {
 
     private void executeHeroActions(Hero sourceHero, List<HeroAction> heroActions) {
         // The target hero is assumed to be the next hero in turn
-        Hero targetHero = heroes.get(getNextHeroIndex());
+        Hero nextHero = heroes.get(getNextHeroIndex());
 
         for (HeroAction heroAction : heroActions) {
-            addActionLogMessage("TODO Not really executing, but would be: " + heroAction);
+            executeHeroAction(sourceHero, heroAction, nextHero);
         }
+    }
+
+    private void executeHeroAction(
+                                Hero sourceHero,
+                                HeroAction heroAction,
+                                Hero nextHero) {
+        ActionType actionType = heroAction.getActionType();
+
+        Hero targetHero;
+        switch (actionType) {
+            case DAMAGE:
+                targetHero = nextHero;
+                doDamageTargetHero(sourceHero, heroAction, targetHero);
+                break;
+            case HEAL:
+                targetHero = sourceHero;
+                doHealTargetHero(sourceHero, heroAction, targetHero);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown ActionType " + actionType);
+        }
+    }
+
+    private void doDamageTargetHero(
+                                Hero sourceHero,
+                                HeroAction heroAction,
+                                Hero targetHero)
+    {
+        int totalDamage = -1 * calculateActionAmountTotal(sourceHero, heroAction);
+
+        targetHero.changeCurrentHP(totalDamage);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(targetHero.getBaseCharacter().getName());
+        sb.append(" has taken ");
+        sb.append(totalDamage);
+        sb.append(" damage, caused by ");
+        sb.append(heroAction.getDescription());
+
+        addActionLogMessage(sb.toString());
+    }
+
+    private void doHealTargetHero(
+                                Hero sourceHero,
+                                HeroAction heroAction,
+                                Hero targetHero)
+    {
+        int totalGain = calculateActionAmountTotal(sourceHero, heroAction);
+
+        targetHero.changeCurrentHP(totalGain);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(targetHero.getBaseCharacter().getName());
+        sb.append(" has received ");
+        sb.append(totalGain);
+        sb.append(" health, caused by ");
+        sb.append(heroAction.getDescription());
+
+        addActionLogMessage(sb.toString());
+    }
+
+    private int calculateActionAmountTotal(Hero sourceHero, HeroAction heroAction) {
+        int baseAmount = heroAction.getBaseAmount();
+        int diceResult = rollDice();
+        int amountModifier = sourceHero.getIq();
+
+        return baseAmount + diceResult + amountModifier;
     }
 
     private void startNextTurn() {
