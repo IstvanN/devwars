@@ -71,6 +71,10 @@ public class Hero {
     return heroActions;
   }
 
+  public void changeCurrentActionPoints(int change) {
+      setCurrentActionPoints(getCurrentActionPoints() + change);
+  }
+
   @Override
   public String toString() {
     return "Hero: " + baseCharacter;

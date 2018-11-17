@@ -30,4 +30,11 @@ public class HeroAction {
         return newHeroAction;
     }
 
+    @Override
+    public String toString() {
+        return "HeroAction{" +
+                "actionType=" + actionType +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

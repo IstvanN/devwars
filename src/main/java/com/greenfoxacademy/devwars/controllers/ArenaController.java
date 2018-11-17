@@ -1,12 +1,11 @@
 package com.greenfoxacademy.devwars.controllers;
 
+import com.greenfoxacademy.devwars.models.gamelogic.Arena;
 import com.greenfoxacademy.devwars.services.ArenaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +22,14 @@ public class ArenaController {
     this.arenaService = arenaService;
   }
 
-  @GetMapping
-  public String showArena(){
+  @GetMapping("{id}")
+  public String showArena(
+          @PathVariable("id") Long id,
+          Model model
+          )
+  {
+    Arena arena = arenaService.getArena(id);
+    model.addAttribute("arena", arena);
     return "arena";
   }
 

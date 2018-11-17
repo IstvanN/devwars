@@ -34,6 +34,11 @@ public class ArenaService {
         return savedArena.getId();
     }
 
+    /**
+     *
+     * @param characterIds the list of ids of characters selected by the players for the new game
+     * @return the id of the created Arena
+     */
     public Long createNewArenaFromCharacterIds(List<Long> characterIds) {
         List<Character> characters = new ArrayList<>();
         Optional<Character> character;
@@ -46,6 +51,10 @@ public class ArenaService {
         }
 
         return createNewArenaFromCharacters(characters);
+    }
+
+    public Arena getArena(Long id) {
+        return arenaRepository.findById(id).orElse(null);
     }
 
 }

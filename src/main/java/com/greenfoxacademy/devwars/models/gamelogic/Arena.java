@@ -41,9 +41,13 @@ public class Arena {
             length = 1000
     )
     Map<Integer, String> actionLog = new HashMap<>();
+    int nextActionLogNumber;
 
     int currentTurnNumber;
-    int nextActionLogNumber;
+    int currentHeroIndex;
+
+    @Transient
+    Hero currentHero;
 
     Dice dice;
 
@@ -51,7 +55,7 @@ public class Arena {
 
     protected Arena(int diceSides) {
         dice = new Dice(diceSides);
-        currentTurnNumber = 1;
+        currentTurnNumber = 0;
         nextActionLogNumber = 1;
     }
 
@@ -59,6 +63,7 @@ public class Arena {
         this(DEFAULT_DICE_SIDES);
         setHeroes(getHeroesFromCharacters(characters));
         addActionLogMessage("Starting battle between these heroes: " + this.getHeroes());
+        startNextTurn();
     }
 
     public int rollDice() {
@@ -68,6 +73,46 @@ public class Arena {
     public void addActionLogMessage(String message) {
         actionLog.put(nextActionLogNumber, message);
         nextActionLogNumber++;
+    }
+
+    public void executeEndTurn(List<HeroAction> heroActions) {
+        executeHeroActions(currentHero, heroActions);
+        startNextTurn();
+    }
+
+    private void executeHeroActions(Hero sourceHero, List<HeroAction> heroActions) {
+        // The target hero is assumed to be the next hero in turn
+        Hero targetHero = heroes.get(getNextHeroIndex());
+
+        for (HeroAction heroAction : heroActions) {
+            addActionLogMessage("TODO Not really executing, but would be: " + heroAction);
+        }
+    }
+
+    private void startNextTurn() {
+        currentTurnNumber++;
+        switchToNextHero();
+        addActionLogMessage("Starting new turn " +
+                currentTurnNumber + " for " + currentHero);
+        replenishCurrentHeroActionPoints();
+    }
+
+    private void switchToNextHero() {
+        currentHero.setActive(false);
+        currentHeroIndex = getNextHeroIndex();
+        currentHero = heroes.get(currentHeroIndex);
+        currentHero.setActive(true);
+    }
+
+    private int getNextHeroIndex() {
+        if (currentHeroIndex == heroes.size() - 1)
+            return 0;
+        else
+            return currentHeroIndex + 1;
+    }
+
+    private void replenishCurrentHeroActionPoints() {
+        currentHero.changeCurrentActionPoints(DEFAULT_HERO_AP_PER_TURN);
     }
 
     private List<Hero> getHeroesFromCharacters(List<Character> characters) {
@@ -98,11 +143,17 @@ public class Arena {
         int heroCount = heroes.size();
         int randomIndex = rand.nextInt(heroCount);
 
+        // TODO really we should randomly re-order the heroes, but we just select a random starter
+        Hero oneHero;
         for (int i = 0; i < heroCount; i++) {
-            if (i == randomIndex)
-                heroes.get(randomIndex).setActive(true);
-            else
-                heroes.get(randomIndex).setActive(false);
+            oneHero = heroes.get(i);
+            if (i == randomIndex) {
+                this.currentHeroIndex = i;
+                this.currentHero = oneHero;
+                this.currentHero.setActive(true);
+            } else {
+                oneHero.setActive(false);
+            }
         }
     }
 }
