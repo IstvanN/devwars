@@ -80,7 +80,7 @@
             <h2>Battle log</h2>
             <div class="battle-log">
                 <div th:each="message : ${arena.getActionLog().values()}">
-                    <span>-> </span>
+                    <span>$ </span>
                     <span th:text="${message}"></span>
                     <br>
                 </div>
