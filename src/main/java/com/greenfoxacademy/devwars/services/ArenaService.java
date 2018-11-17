@@ -2,6 +2,7 @@ package com.greenfoxacademy.devwars.services;
 
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
 import com.greenfoxacademy.devwars.models.gamelogic.Arena;
+import com.greenfoxacademy.devwars.models.gamelogic.HeroAction;
 import com.greenfoxacademy.devwars.repositories.ArenaRepository;
 import com.greenfoxacademy.devwars.repositories.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,19 @@ public class ArenaService {
         return createNewArenaFromCharacters(characters);
     }
 
-    public Arena getArena(Long id) {
-        return arenaRepository.findById(id).orElse(null);
+    public Arena getArena(Long arenaId) {
+        return arenaRepository.findById(arenaId).orElse(null);
+    }
+
+    public void executeEndTurn(Long arenaId, String action) {
+        Arena arena = arenaRepository.findById(arenaId).orElse(null);
+        List<HeroAction> currentHeroActions = arena.getCurrentHero().getAvailableActions();
+        for (HeroAction heroAction : currentHeroActions) {
+            if (heroAction.getName().equals(action))
+                arena.executeEndTurnWithSingleAction(heroAction);
+        }
+
+        arenaRepository.save(arena);
     }
 
 }

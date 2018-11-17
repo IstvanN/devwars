@@ -76,6 +76,10 @@ public class Arena {
         nextActionLogNumber++;
     }
 
+    public void executeEndTurnWithSingleAction(HeroAction heroAction) {
+        executeEndTurn(Arrays.asList(heroAction));
+    }
+
     public void executeEndTurn(List<HeroAction> heroActions) {
         executeHeroActions(getCurrentHero(), heroActions);
         startNextTurn();

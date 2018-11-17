@@ -43,4 +43,14 @@ public class ArenaController {
       Long newArenaId = arenaService.createNewArenaFromCharacterIds(characterIds);
       return "redirect:" + CONTROLLER_ROOT + newArenaId;
   }
+
+  @PostMapping("{id}")
+  public String submitExecuteEndTurn(
+                        @PathVariable("id") Long id,
+                        @ModelAttribute("selectedAction") String selectedAction,
+                        Model model)
+  {
+        arenaService.executeEndTurn(id, selectedAction);
+        return "redirect:" + CONTROLLER_ROOT + id;
+  }
 }
