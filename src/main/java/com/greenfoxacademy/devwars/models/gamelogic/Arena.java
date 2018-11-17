@@ -31,7 +31,7 @@ public class Arena {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
-    List<Hero> heroes;
+    List<Hero> heroes = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "arena_action_log")
@@ -51,7 +51,8 @@ public class Arena {
 
     Dice dice;
 
-    protected Arena() {}
+    protected Arena() {
+    }
 
     protected Arena(int diceSides) {
         dice = new Dice(diceSides);
@@ -76,8 +77,15 @@ public class Arena {
     }
 
     public void executeEndTurn(List<HeroAction> heroActions) {
-        executeHeroActions(currentHero, heroActions);
+        executeHeroActions(getCurrentHero(), heroActions);
         startNextTurn();
+    }
+
+    public Hero getCurrentHero() {
+        if (this.currentHero == null)
+            this.currentHero = heroes.get(currentHeroIndex);
+
+        return this.currentHero;
     }
 
     private void executeHeroActions(Hero sourceHero, List<HeroAction> heroActions) {
@@ -93,12 +101,12 @@ public class Arena {
         currentTurnNumber++;
         switchToNextHero();
         addActionLogMessage("Starting new turn " +
-                currentTurnNumber + " for " + currentHero);
+                currentTurnNumber + " for " + getCurrentHero());
         replenishCurrentHeroActionPoints();
     }
 
     private void switchToNextHero() {
-        currentHero.setActive(false);
+        getCurrentHero().setActive(false);
         currentHeroIndex = getNextHeroIndex();
         currentHero = heroes.get(currentHeroIndex);
         currentHero.setActive(true);
@@ -112,7 +120,7 @@ public class Arena {
     }
 
     private void replenishCurrentHeroActionPoints() {
-        currentHero.changeCurrentActionPoints(DEFAULT_HERO_AP_PER_TURN);
+        getCurrentHero().changeCurrentActionPoints(DEFAULT_HERO_AP_PER_TURN);
     }
 
     private List<Hero> getHeroesFromCharacters(List<Character> characters) {
