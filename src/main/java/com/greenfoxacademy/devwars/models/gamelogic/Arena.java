@@ -219,7 +219,7 @@ public class Arena {
         currentTurnNumber++;
         switchToNextHero();
         addActionLogMessage("Starting new turn " +
-                currentTurnNumber + " for " + getCurrentHero());
+                currentTurnNumber + " for " + getCurrentHero().getBaseCharacter().getName());
         replenishCurrentHeroActionPoints();
     }
 

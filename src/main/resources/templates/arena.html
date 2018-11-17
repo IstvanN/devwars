@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row" th:object="${arena}">
         <div class="col-3">
-            <h2>Player 1</h2>
+            <h2 th:text="${arena.getLeftHero().getBaseCharacter().getName()}"></h2>
             <img th:src="${arena.getLeftHero().getBaseCharacter().getImgSource()}">
             <table>
                 <tr>
@@ -33,10 +33,6 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <td>Name:</td>
-                    <td th:text="${arena.getLeftHero().getBaseCharacter().getName()}"></td>
-                </tr>
-                <tr>
                     <td>Age:</td>
                     <td th:text="${arena.getLeftHero().getBaseCharacter().getAge()}"></td>
                 </tr>
@@ -44,6 +40,15 @@
                     <td>League:</td>
                     <td th:text="${arena.getLeftHero().getBaseCharacter().getLeague()}"></td>
                 </tr>
+                <tr>
+                    <td>Language:</td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getCompetences().get(0).competence.description}"></td>
+                </tr>
+                <tr>
+                    <td>Technology:</td>
+                    <td th:text="${arena.getLeftHero().getBaseCharacter().getCompetences().get(1).competence.description}"></td>
+                </tr>
+                <tr>
                 <tr>
                     <td>OS:</td>
                     <td th:text="${arena.getLeftHero().getBaseCharacter().getOs().getName()}"></td>
@@ -82,7 +87,8 @@
             </div>
         </div>
         <div class="col-3">
-            <h2>Player 2</h2>
+            <h2 th:text="${arena.getRightHero().getBaseCharacter().getName()}"></h2>
+            <img th:src="${arena.getRightHero().getBaseCharacter().getImgSource()}">
             <table>
                 <tr>
                     <th>Stats</th>
@@ -105,16 +111,20 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <td>Name:</td>
-                    <td th:text="${arena.getRightHero().getBaseCharacter().getName()}"></td>
-                </tr>
-                <tr>
                     <td>Age:</td>
                     <td th:text="${arena.getRightHero().getBaseCharacter().getAge()}"></td>
                 </tr>
                 <tr>
                     <td>League:</td>
                     <td th:text="${arena.getRightHero().getBaseCharacter().getLeague()}"></td>
+                </tr>
+                <tr>
+                    <td>Language:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getCompetences().get(0).competence.description}"></td>
+                </tr>
+                <tr>
+                    <td>Technology:</td>
+                    <td th:text="${arena.getRightHero().getBaseCharacter().getCompetences().get(1).competence.description}"></td>
                 </tr>
                 <tr>
                     <td>OS:</td>
