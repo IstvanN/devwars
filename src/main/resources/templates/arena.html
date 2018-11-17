@@ -2,16 +2,65 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout(~{ :: body})">
 <head>
     <meta charset="UTF-8"/>
+    <link href="/css/style.css" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
 <div class="container">
-    <div class="row">
+    <div class="row" th:object="${arena}">
         <div class="col-3">
-            <h2>Challenger</h2>
+            <h2>Current Hero</h2>
+            <table>
+                <tr><th>Stats</th><th></th></tr>
+                <tr>
+                    <td>HP:</td>
+                    <td th:text="${arena.getCurrentHero().getCurrentHP()}"></td>
+                </tr>
+                <tr>
+                    <td>Action Points:</td>
+                    <td th:text="${arena.getCurrentHero().getCurrentActionPoints()}"></td>
+                </tr>
+                <tr>
+                    <td>IQ:</td>
+                    <td th:text="${arena.getCurrentHero().getIq()}"></td>
+                </tr>
+                <tr><th>Character</th><th></th></tr>
+                <tr>
+                    <td>Name:</td>
+                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getName()}"></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getAge()}"></td>
+                </tr>
+                <tr>
+                    <td>League:</td>
+                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getLeague()}"></td>
+                </tr>
+                <tr>
+                    <td>OS:</td>
+                    <td th:text="${arena.getCurrentHero().getBaseCharacter().getOs().getName()}"></td>
+                </tr>
+                <tr><th>Action</th><th></th></tr>
+            </table>
+
+            <form th:action="@{'/arena/' + ${arena.getId()}}" method="POST">
+                <label for="selectedAction">Action:</label>
+                <select id="selectedAction" name="selectedAction">
+                    <option th:each="action : ${arena.getCurrentHero().getAvailableActions()}" th:text="${action.getName()}" th:value="${action.getName()}" ></option>
+                </select>
+                <button type="submit">End Turn</button>
+            </form>
         </div>
         <div class="col-6">
             <h2>Battle log</h2>
+            <div>
+                <div th:each="message : ${arena.getActionLog().values()}" >
+                    <span>-> </span>
+                    <span th:text="${message}"></span>
+                    <br>
+                </div>
+            </div>
         </div>
         <div class="col-3">
             <h2>Enemy</h2>

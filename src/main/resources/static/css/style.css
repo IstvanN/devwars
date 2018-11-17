@@ -1,4 +1,4 @@
-h1, h2, p, td, label {
+h1, h2, p, td, label, span {
     font-family: "Inconsolata", "Courier New", sans-serif !important;
     color: white;
 }
@@ -9,6 +9,7 @@ input {
 
 body {
     background-color: black;
+    color: white;
 }
 
 .col-3, .col-6, .col-8 {
