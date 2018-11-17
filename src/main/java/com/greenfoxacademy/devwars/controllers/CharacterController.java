@@ -1,9 +1,7 @@
 package com.greenfoxacademy.devwars.controllers;
 
+import com.greenfoxacademy.devwars.models.characterlogic.*;
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
-import com.greenfoxacademy.devwars.models.characterlogic.CharacterCompetence;
-import com.greenfoxacademy.devwars.models.characterlogic.League;
-import com.greenfoxacademy.devwars.models.characterlogic.OS;
 import com.greenfoxacademy.devwars.services.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class CharacterController {
@@ -38,10 +38,14 @@ public class CharacterController {
   }
 
   @PostMapping("/create")
-  public String postCreate(@ModelAttribute Character character, @RequestParam("osId") Long osId, @RequestParam("league") League league) {
+  public String postCreate(@ModelAttribute Character character, @RequestParam("osId") Long osId,
+                           @RequestParam("league") League league, @RequestParam("language") Competence language,
+                           @RequestParam("technology") Competence technology) {
     OS os = characterService.getOSById(osId);
     character.setOs(os);
     character.setLeague(league);
+    List<Competence> competences = Arrays.asList(language, technology);
+    character.setCompetences(competences);
     characterService.save(character);
     return "redirect:/";
   }

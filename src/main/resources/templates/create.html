@@ -34,13 +34,13 @@
                 </div>
                 <div class="form-group">
                     <label>Languages:</label>
-                    <select>
+                    <select name="language">
                         <option th:each="language : ${languages}" th:value="${language}" th:text="${language.description}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Technology:</label>
-                    <select>
+                    <select name="technology">
                         <option th:each="technology : ${technologies}" th:value="${technology}" th:text="${technology.description}"></option>
                     </select>
                 </div>

@@ -1,9 +1,7 @@
 package com.greenfoxacademy.devwars.services;
 
+import com.greenfoxacademy.devwars.models.characterlogic.*;
 import com.greenfoxacademy.devwars.models.characterlogic.Character;
-import com.greenfoxacademy.devwars.models.characterlogic.Competence;
-import com.greenfoxacademy.devwars.models.characterlogic.CompetenceType;
-import com.greenfoxacademy.devwars.models.characterlogic.OS;
 import com.greenfoxacademy.devwars.repositories.CharacterRepository;
 import com.greenfoxacademy.devwars.repositories.CompetenceRepository;
 import com.greenfoxacademy.devwars.repositories.OSRepository;
